@@ -7,6 +7,7 @@
     <title>{{ env("APP_NAME") }}</title>
 </head>
 <body>
+    <x-header />
     {{ $slot }}
 </body>
 </html>
