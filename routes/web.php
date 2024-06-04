@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn() => view('home'))->name('home');
@@ -14,3 +15,9 @@ Route::middleware('guest')->group(fn() => [
     Route::get('/register', fn() => view('auth.register'))->name('auth.register'),
     Route::post('/login', [AuthController::class, 'login']),
 ]);
+
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{username}', [UserController::class, 'show'])->name('users.show');
+
+Route::get('/account', [UserController::class, 'edit'])->name('users.edit');
+Route::put('/account', [UserController::class, 'update'])->name('users.update');
