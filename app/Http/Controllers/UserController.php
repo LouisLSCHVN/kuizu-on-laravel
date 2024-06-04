@@ -44,18 +44,18 @@ class UserController extends Controller
      */
     public function update(Request $request)
     {
-        $path = null;
-        if($request->hasFile('profile_picture')) {
-            $path = Storage::disk('public')->put('users', $request->profile_picture);
-        }
-
-
         $fields = $request->validate([
             'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
             'bio' => 'nullable|string',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
+
+        $path = null;
+        if($request->hasFile('profile_picture')) {
+            $path = Storage::disk('public')->put('users', $request->profile_picture);
+        }
+
 
         $user = Auth::user();
         User::where('id', $user->id)->update([
