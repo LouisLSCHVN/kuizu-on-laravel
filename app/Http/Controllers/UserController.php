@@ -51,19 +51,16 @@ class UserController extends Controller
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,svg,webp|max:2048',
         ]);
 
-        $path = null;
+        $path = Auth::user()->profile_picture ?? null;
         if($request->hasFile('profile_picture')) {
             $path = Storage::disk('public')->put('users', $request->profile_picture);
         }
-
 
         $user = Auth::user();
         User::where('id', $user->id)->update([
             ...$fields,
             'profile_picture' => $path
         ]);
-
-        dd($fields);
 
         return redirect()->route('users.edit')->with('success', 'Profile updated successfully');
     }

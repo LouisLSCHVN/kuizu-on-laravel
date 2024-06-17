@@ -46,4 +46,9 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function quizzs()
+    {
+        return $this->hasMany(Quizz::class);
+    }
 }

@@ -49,13 +49,13 @@ Les utilisateurs peuvent s'inscrire, se connecter et jouer à des quiz. Ils peuv
 
 - [X] Inscription : Permettre aux utilisateurs de s'inscrire
 - [X] Connexion : Permettre aux utilisateurs de se connecter
-- [ ] Show : Afficher le profil d'un utilisateur
-- [ ] Edit : Modifier le profil d'un utilisateur (username, email, bio, profile_picture, pseudo_color)
+- [X] Show : Afficher le profil d'un utilisateur
+- [X] Edit : Modifier le profil d'un utilisateur (username, email, bio, profile_picture, pseudo_color)
 - [ ] Reset password : Permettre aux utilisateurs de réinitialiser leur mot de passe (envoi d'un email de réinitialisation)
 - [ ] Verify email : Permettre aux utilisateurs de vérifier leur adresse email (envoi d'un email de vérification)
 - [ ] Change password : Permettre aux utilisateurs de changer leur mot de passe
 - [ ] Delete : Supprimer un utilisateur
-- [ ] Logout : Déconnecter un utilisateur
+- [X] Logout : Déconnecter un utilisateur
 
 ## Quiz
 
@@ -70,6 +70,16 @@ Les utilisateurs peuvent créer des quiz, les partager, collaborer et les jouer.
 - `created_at` -> **timestamp** : Date de création
 - `updated_at` -> **timestamp** : Date de mise à jour
 - `published` -> **boolean** : Quiz publié / défault : `false`
+
+### Fonctionnalités
+
+- [ ] Create : Créer un quiz
+- [ ] Show : Afficher un quiz
+- [ ] Edit : Modifier un quiz
+- [ ] Delete : Supprimer un quiz
+- [ ] Publish : Publier un quiz
+- [ ] Unpublish : Dépublier un quiz
+- [ ] Share : Partager un quiz
 
 ## Question
 

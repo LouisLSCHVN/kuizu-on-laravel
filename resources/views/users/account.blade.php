@@ -2,6 +2,10 @@
 <x-layout>
     <h1>User Account</h1>
 
+    @if (session('success'))
+        <p>{{ session('success') }}</p>
+    @endif
+
     <form action="{{ route("users.update") }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method("PUT")
