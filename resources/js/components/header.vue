@@ -1,19 +1,29 @@
 <template>
-    <header class="navbar bg-base-100">
+    <header class="navbar bg-base-100 fixed z-50 w-full bg-indigo-100">
         <div class="navbar-start">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                 </div>
-                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Homepage</a></li>
-                    <li><a>Portfolio</a></li>
-                    <li><a>About</a></li>
+                <ul v-if="$page.props.auth && $page.props.auth.user" tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a>Créer</a></li>
+                    <li><a>Jouer</a></li>
+                    <li><a>Compte</a></li>
+                    <li>
+                        <form @submit.prevent="useForm({}).post(route('auth.logout'))" method="POST">
+                            <button type="submit" class="link link-error">Deconnexion</button>
+                        </form>
+                    </li>
+                </ul>
+                <ul v-else tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                    <li><a :href="route('auth.login')">Connexion</a></li>
+                    <li><a :href="route('auth.register')">Inscription</a></li>
+                    <li><a>Découvrir</a></li>
                 </ul>
             </div>
-        </div>
-        <div class="navbar-center">
-            <a class="btn btn-ghost text-xl">daisyUI</a>
+            <p class="link ml-2">
+                {{ $page.props.auth && $page.props.auth.user.username }}
+            </p>
         </div>
         <div class="navbar-end">
             <button class="btn btn-ghost btn-circle">
@@ -28,7 +38,11 @@
         </div>
     </header>
 </template>
+<script setup>
+import {useForm} from "@inertiajs/vue3";
+</script>
 <script>
+
 export default {
     name: "Header",
 }

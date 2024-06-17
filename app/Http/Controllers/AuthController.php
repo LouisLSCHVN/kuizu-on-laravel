@@ -16,8 +16,8 @@ class AuthController extends Controller
     public function register(Request $request) {
         // Validate the request
         $fields = $request->validate([
-            'username' => ['required','max:255'],
-            'email' => ['required','email'],
+            'username' => ['required','max:255', 'unique:users'],
+            'email' => ['required','email', 'unique:users'],
             'password' => ['required'],
         ]);
 
@@ -27,7 +27,7 @@ class AuthController extends Controller
         Auth::login($user);
 
         // Redirect to the home page
-        return redirect('/');
+        return redirect()->route('home')->with('success', 'You created an account!');
     }
 
     public function login(Request $request) {
@@ -45,11 +45,11 @@ class AuthController extends Controller
         }
 
         // Redirect to the home page
-        return redirect('/');
+        return redirect()->route('home')->with('success', 'You are now logged in!');
     }
 
     public function logout() {
         Auth::logout();
-        return redirect()->route('home');
+        return redirect()->route('home')->with('success', 'You are now logged out!');
     }
 }
