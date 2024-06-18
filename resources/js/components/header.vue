@@ -6,7 +6,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
                 </div>
                 <ul v-if="$page.props.auth && $page.props.auth.user" tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                    <li><a>Créer</a></li>
+                    <li><a :href="route('quizz.create')">Créer</a></li>
                     <li><a>Jouer</a></li>
                     <li><a>Compte</a></li>
                     <li>
@@ -21,7 +21,7 @@
                     <li><a>Découvrir</a></li>
                 </ul>
             </div>
-            <p class="link ml-2">
+            <p class="link ml-2" v-if="$page.props.auth && $page.props.auth.user">
                 {{ $page.props.auth && $page.props.auth.user.username }}
             </p>
         </div>
@@ -35,6 +35,13 @@
                     <span class="badge badge-xs badge-primary indicator-item"></span>
                 </div>
             </button>
+            <button class="btn btn-ghost btn-circle">
+                <a :href="route('home')">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                </a>
+            </button>
         </div>
     </header>
 </template>
@@ -46,21 +53,4 @@ import {useForm} from "@inertiajs/vue3";
 export default {
     name: "Header",
 }
-
-/**
- * <header>
- *         <nav>
- *             <a :href="route('home')">Home</a>
- *
- *             <form v-if="$page.props.auth.user" :action="route('logout')" method="POST">
- *             <button type="submit">Logout</button>
- *             </form>
- *             <div v-else>
- *                 <a :href='route("auth.login")'>Login</a>
- *                 <a :href='route("auth.register")'>Register</a>
- *             </div>
- *         </nav>
- *     </header>
- *
- */
 </script>

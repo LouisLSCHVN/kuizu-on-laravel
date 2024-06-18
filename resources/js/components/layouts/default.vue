@@ -1,7 +1,7 @@
 <template>
     <Head :title="props.title" />
     <Header />
-    <main>
+    <main class="pt-[100px] px-5">
         <slot />
     </main>
 </template>

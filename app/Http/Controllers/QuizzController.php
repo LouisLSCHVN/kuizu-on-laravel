@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Quizz;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Inertia\Inertia;
 
 class QuizzController extends Controller
 {
@@ -12,7 +15,6 @@ class QuizzController extends Controller
      */
     public function index()
     {
-        //
     }
 
     /**
@@ -28,7 +30,16 @@ class QuizzController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $fields = $request->validate([
+            "title" => ['required', 'string', 'max:255'],
+            "description" => ['required', 'string', 'max:500']
+        ]);
+
+        $user = Auth::user();
+
+        $fields['user_id'] = $user->getAuthIdentifier();
+
+        $quizz = Quizz::create($fields);
     }
 
     /**

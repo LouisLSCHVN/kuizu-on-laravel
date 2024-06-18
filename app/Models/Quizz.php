@@ -14,5 +14,6 @@ class Quizz extends Model
         'description',
         'published',
         'picture',
+        'user_id',
     ];
 }

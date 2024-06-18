@@ -1,6 +1,6 @@
 <template>
-    <div class="w-2/4 mx-auto pt-20">
-        <h1 class="text-5xl font-bold my-10">Login</h1>
+    <div class="w-2/4 mx-auto">
+        <h1 class="text-5xl font-bold mb-10">Login</h1>
         <form @submit.prevent="
             form.post(route('auth.login.post'), {
                 onError: () => form.reset('password', errors)

@@ -2,6 +2,7 @@
 
 <form method="POST">
     @csrf
+
     <input type="text" name="email" placeholder="email"/>
     @error('mail')
         <p>{{ $message }}</p>

@@ -1,26 +1,33 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\QuizzController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::inertia('', 'home')->name('home');
-// Route::get('/', fn() => view('home'))->name('home');
+// Route for the home page
+Route::inertia('/', 'home')->name('home');
 
-Route::middleware('guest')->group(fn() => [
-    Route::inertia('/login', 'user/login')->name('auth.login'),
-    Route::post('/login', [AuthController::class, 'login'])->name('auth.login.post'),
+// Routes for guests (not authenticated users)
+Route::middleware('guest')->group(function () {
+    Route::inertia('/login', 'user/login')->name('auth.login');
+    Route::post('/login', [AuthController::class, 'login'])->name('auth.login.post');
 
-    Route::inertia('/register', 'user/register')->name('auth.register'),
-    Route::post('/register', [AuthController::class, 'register'])->name('auth.register.post'),
+    Route::inertia('/register', 'user/register')->name('auth.register');
+    Route::post('/register', [AuthController::class, 'register'])->name('auth.register.post');
+});
 
-]);
+// Routes for authenticated users
+Route::middleware('auth')->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::middleware('auth')->group(fn() => [
-    Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout'),
-]);
+    Route::inertia('/quizz/create', 'quizz/create', [QuizzController::class, 'index'])->name('quizz.create');
+    Route::post('/quizz/create', [QuizzController::class, 'store'])->name('quizz.store');
+});
 
 /**
  *
